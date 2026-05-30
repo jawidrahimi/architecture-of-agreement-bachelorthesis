@@ -13,22 +13,24 @@ Count (ACC) algorithm.
 Repository Structure
 ```
 ├── data/
-│   ├── complete_dataset_test.json                # 500-comment Gold Standard (Human labeled)
-│   └── group_level_prevalences12_values.csv      # 50-group continuous dataset (Final output)
+│   ├── complete_dataset.json            # 500-comment Gold Standard (Human labeled)
+│   ├── group_level_prevalences.csv      # 20-group continuous results (all features)
+│   └── group_level_prevalences12values.csv # 50-group continuous results (12 active features)
 │
 ├── src/
-│   ├── main.py                           # Model Fine-tuning (SetFit + ModernBERT)
-│   ├── get_error_rates.py                # Extract Validation TPR/FPR for ACC
-│   ├── label_dataset.py                  # GPU-optimized batch inference script
-│   ├── quantify_groups12_values.py       # ACC Calibration (12 approved features)
-│   └── run_statistical_tests_filtered.py # Hypothesis testing (Paired t-tests)
+│   ├── main.py                          # Model Fine-tuning (SetFit + ModernBERT)
+│   ├── get_error_rates.py               # Extract Validation TPR/FPR for ACC
+│   ├── label_dataset.py                 # GPU-optimized batch inference script
+│   ├── quantify_groups.py               # ACC Calibration (original 20 features)
+│   ├── quantify_groups12_values.py      # ACC Calibration (12 approved features)
+│   ├── run_statistical_tests.py         # Hypothesis testing (20 features)
+│   └── run_statistical_tests12_values.py # Hypothesis testing (12 approved features)
 │
 ├── diagnostics/
-│   ├── analyze_lengths.py                # Token length distribution analyzer
 │   ├── analyze_bias_and_distributions.py # Model systematic bias audit script
-│   └── pilot_comparison.py               # Sequence length comparison script
+│   ├── pilot_comparison.py              # Sequence length comparison script (256 vs 512)
+│   └── seq_length_dis.py                # Token length distribution analyzer
 │
-├── .gitignore                           # Excludes large files and model weights
 └── requirements.txt                     # Python packages list
 ```
 Installation & Setup

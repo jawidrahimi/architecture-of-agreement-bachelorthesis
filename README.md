@@ -40,11 +40,16 @@ Installation & Setup
 
 2.  Create and activate a virtual environment:
 
-    python3 -m venv thesis_env
-    source thesis_env/bin/activate
+    This project requires **Python 3.10** due to dependency constraints between `setfit`, `sentence-transformers`, and `transformers`. Python 3.12+ will cause import errors.
+    
+    Install Python 3.10 via [pyenv](https://github.com/pyenv/pyenv) if needed:
+    brew install pyenv
+    pyenv install 3.10.13
 
 3.  Install dependencies:
 
+    ~/.pyenv/versions/3.10.13/bin/python -m venv thesis_env
+    source thesis_env/bin/activate
     pip install -r requirements.txt
 
 Replication Pipeline

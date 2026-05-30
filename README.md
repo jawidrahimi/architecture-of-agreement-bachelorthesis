@@ -1,17 +1,15 @@
-The Architecture of Agreement: Value-Based Persuasion in r/changemyview
-
-The replication code and data for the thesis “The
-Architecture of Agreement: Value-Based Persuasion in r/changemyview”.
-
-This repo explores how alignment on human values (based on Schwartz's Basic
-Human Values) between an original poster (OP) and a responder correlates with
-persuasive success on r/changemyview (CMV) subreddit. To bypass
-classifier noise at the individual level, this study implements a Group Level
-Quantification (Prevalence Estimation) pipeline using the Adjusted Classify and
-Count (ACC) algorithm.
-
-Repository Structure
 ```
+# The Architecture of Agreement: Value-Based Persuasion in r/changemyview
+
+The replication code and data for the thesis *“The Architecture of Agreement: Value-Based Persuasion in r/changemyview”*.
+
+This repository explores how alignment on human values (based on Schwartz's Basic Human Values) between an original poster (OP) and a responder correlates with persuasive success on the `r/changemyview` (CMV) subreddit. To bypass classifier noise at the individual level, this study implements a Group-Level Quantification (Prevalence Estimation) pipeline using the Adjusted Classify and Count (ACC) algorithm.
+
+---
+
+## Repository Structure
+
+```text
 ├── data/
 │   ├── complete_dataset.json            # 500-comment Gold Standard (Human labeled)
 │   ├── group_level_prevalences.csv      # 20-group continuous results (all features)
@@ -31,66 +29,73 @@ Repository Structure
 │   ├── pilot_comparison.py              # Sequence length comparison script (256 vs 512)
 │   └── seq_length_dis.py                # Token length distribution analyzer
 │
+├── .gitignore                           # Excludes large files and model weights
 └── requirements.txt                     # Python packages list
 ```
-Installation & Setup
 
-1.  Clone the repository:
+---
 
-    git clone https://github.com/yourusername/architecture-of-agreement.git
-    cd architecture-of-agreement
+## Installation & Setup
 
-2.  Create and activate a virtual environment:
+### 1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/architecture-of-agreement.git
+cd architecture-of-agreement
+```
 
-    This project requires **Python 3.10** due to dependency constraints between `setfit`, `sentence-transformers`, and `transformers`. Python 3.12+ will cause import errors.
-    
-    Install Python 3.10 via [pyenv](https://github.com/pyenv/pyenv) if needed:
-    brew install pyenv
-    pyenv install 3.10.13
+### 2. Create and activate a virtual environment:
+> **Note:** This project requires **Python 3.10** due to strict dependency constraints between `setfit`, `sentence-transformers`, and `transformers`. Python 3.12+ will cause import and compilation errors.
 
-3.  Install dependencies:
+If needed, install Python 3.10 via `pyenv`:
+```bash
+brew install pyenv
+pyenv install 3.10.13
+```
 
-    ~/.pyenv/versions/3.10.13/bin/python -m venv thesis_env
-    source thesis_env/bin/activate
-    pip install -r requirements.txt
+Create your virtual environment using your PyTorch-compatible Python 3.10 binary and activate it:
+```bash
+~/.pyenv/versions/3.10.13/bin/python -m venv thesis_env
+source thesis_env/bin/activate
+```
 
-Replication Pipeline
+### 3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-To reproduce the findings of this thesis, execute the scripts in the following
-order:
+---
 
-Step 1: Model Training & Validation
+## Replication Pipeline
 
-Fine-tune the ModernBERT model using the SetFit framework on the human-labeled
-gold standard:
+To reproduce the findings of this thesis using the 12 active, validated value features, execute the scripts in the following order:
 
+### Step 1: Model Training & Validation
+Fine-tune the ModernBERT model using the SetFit framework on the human-labeled gold standard:
+```bash
 python3 src/main.py
+```
 
-Calculate the model's True Positive Rate (TPR) and False Positive Rate (FPR)
-across the validation set:
-
+Calculate the model's True Positive Rate (TPR) and False Positive Rate (FPR) across the validation set:
+```bash
 python3 src/get_error_rates.py
+```
 
-Step 2: Large-Scale Inference
-
-Run batched GPU-accelerated inference across the full 10,303 structured argument
-pairs:
-
+### Step 2: Large-Scale Inference
+Run batched GPU-accelerated inference across the full 10,303 structured argument pairs:
+```bash
 python3 src/label_dataset.py
+```
+*(Note: To run this step, you must obtain the raw `pairs.jsonl` file from the Webis-CMV-20 corpus and place it in the root directory).*
 
-(Note: To run this step, you must obtain the raw pairs.jsonl file from the
-Webis-CMV-20 corpus and place it in the root directory).
+### Step 3: Group-Level Quantification (ACC Calibration)
+Aggregate the inference predictions into 50 sub-populations and apply the ACC mathematical calibration formula over the 12 approved features:
+```bash
+python3 src/quantify_groups12_values.py
+```
 
-Step 3: Group-Level Quantification (ACC Calibration)
-
-Aggregate the inference predictions into 50 sub-populations and apply the ACC
-mathematical calibration formula over the 12 approved features:
-
-python3 src/quantify_groups11.py
-
-Step 4: Hypothesis Testing
-
-Run the final statistical tests (Paired t-tests) to evaluate value-matching
-distance and individual value predictors:
-
-python3 src/run_statistical_tests_filtered.py
+### Step 4: Hypothesis Testing
+Run the final statistical tests (Paired $t$-tests) to evaluate value-matching distance and individual value predictors:
+```bash
+python3 src/run_statistical_tests12_values.py
+```
+```

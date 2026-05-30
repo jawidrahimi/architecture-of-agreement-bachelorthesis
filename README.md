@@ -13,20 +13,20 @@ Count (ACC) algorithm.
 Repository Structure
 ```
 ├── data/
-│   ├── complete_dataset_test.json       # 500-comment Gold Standard (Human labeled)
-│   └── group_level_prevalences.csv      # 50-group continuous dataset (Final output)
+│   ├── complete_dataset_test.json                # 500-comment Gold Standard (Human labeled)
+│   └── group_level_prevalences12_values.csv      # 50-group continuous dataset (Final output)
 │
 ├── src/
-│   ├── main.py                          # Model Fine-tuning (SetFit + ModernBERT)
-│   ├── get_error_rates.py               # Extract Validation TPR/FPR for ACC
-│   ├── label_dataset.py                 # GPU-optimized batch inference script
-│   ├── quantify_groups11.py             # ACC Calibration (12 approved features)
+│   ├── main.py                           # Model Fine-tuning (SetFit + ModernBERT)
+│   ├── get_error_rates.py                # Extract Validation TPR/FPR for ACC
+│   ├── label_dataset.py                  # GPU-optimized batch inference script
+│   ├── quantify_groups12_values.py       # ACC Calibration (12 approved features)
 │   └── run_statistical_tests_filtered.py # Hypothesis testing (Paired t-tests)
 │
 ├── diagnostics/
-│   ├── analyze_lengths.py               # Token length distribution analyzer
+│   ├── analyze_lengths.py                # Token length distribution analyzer
 │   ├── analyze_bias_and_distributions.py # Model systematic bias audit script
-│   └── pilot_comparison.py              # Sequence length comparison script
+│   └── pilot_comparison.py               # Sequence length comparison script
 │
 ├── .gitignore                           # Excludes large files and model weights
 └── requirements.txt                     # Python packages list

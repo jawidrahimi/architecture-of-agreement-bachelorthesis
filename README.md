@@ -11,7 +11,7 @@ Quantification (Prevalence Estimation) pipeline using the Adjusted Classify and
 Count (ACC) algorithm.
 
 Repository Structure
-
+```
 ├── data/
 │   ├── complete_dataset_test.json       # 500-comment Gold Standard (Human labeled)
 │   └── group_level_prevalences.csv      # 50-group continuous dataset (Final output)
@@ -30,7 +30,7 @@ Repository Structure
 │
 ├── .gitignore                           # Excludes large files and model weights
 └── requirements.txt                     # Python packages list
-
+```
 Installation & Setup
 
 1.  Clone the repository:

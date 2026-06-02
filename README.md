@@ -25,7 +25,7 @@ Repository Structure
 │   ├── quantify_groups12_values.py      # ACC Calibration (12 approved features)
 │   ├── run_statistical_tests.py         # Hypothesis testing (20 features)
 │   └── run_statistical_tests12_values.py # Hypothesis testing (12 approved features)
-│
+│   └── extract_op_delta_rebuttal.py     # Extracts the 10,303 triade pairs from pairs.jsonl (Al-Khatib et al., 2020) 
 ├── diagnostics/
 │   ├── analyze_bias_and_distributions.py # Model systematic bias audit script
 │   ├── pilot_comparison.py              # Sequence length comparison script (256 vs 512)

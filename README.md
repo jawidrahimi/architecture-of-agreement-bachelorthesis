@@ -18,6 +18,7 @@ Repository Structure
 │   └── group_level_prevalences12values.csv # 50-group continuous results (12 active features)
 │   └── pairs.jsonl                      # each record contains submission, delta-comment and nondelta-comment and the comments' similarity score
 |   └── triage_pairs.json                # each record contains an Original Post, a Delta-winning rebuttal, and a non-winning rebuttal from the same discussion tree
+|
 ├── src/
 │   ├── main.py                          # Model Fine-tuning (SetFit + ModernBERT)
 │   ├── get_error_rates.py               # Extract Validation TPR/FPR for ACC
@@ -26,12 +27,18 @@ Repository Structure
 │   ├── quantify_groups12_values.py      # ACC Calibration (12 approved features)
 │   ├── run_statistical_tests.py         # Hypothesis testing (20 features)
 │   └── run_statistical_tests12_values.py # Hypothesis testing (12 approved features)
-│   └── extract_op_delta_rebuttal.py     # Extracts the 10,303 triade pairs from pairs.jsonl (Al-Khatib et al., 2020) 
+│   └── extract_op_delta_rebuttal.py     # Extracts the 10,303 triade pairs from pairs.jsonl (Al-Khatib et al., 2020)
+|
 ├── diagnostics/
 │   ├── analyze_bias_and_distributions.py # Model systematic bias audit script
 │   ├── pilot_comparison.py              # Sequence length comparison script (256 vs 512)
 │   └── seq_length_dis.py                # Token length distribution analyzer
-│
+│   └── baseline_singlelabel.py          # TF-IDF + Logistic Regression/SVM predicting only the first human value per text (single-label) 
+|   └── baseline_multilabel.py           # TF-IDF + Logistic Regression/SVM predicting all human values per text simultaneously (multi-label).
+|   └── iaa.py                           # computes IAA (pairwise F1, per-label consensus, and label frequencies) across three annotators' JSON files
+
+
+|
 └── requirements.txt                     # Python packages list
 ```
 Installation & Setup

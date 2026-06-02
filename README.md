@@ -16,7 +16,8 @@ Repository Structure
 │   ├── complete_dataset.json            # 500-comment Gold Standard (Human labeled)
 │   ├── group_level_prevalences.csv      # 20-group continuous results (all features)
 │   └── group_level_prevalences12values.csv # 50-group continuous results (12 active features)
-│
+│   └── pairs.jsonl                      # each record contains submission, delta-comment and nondelta-comment and the comments' similarity score
+|   └── triage_pairs.json                # each record contains an Original Post, a Delta-winning rebuttal, and a non-winning rebuttal from the same discussion tree
 ├── src/
 │   ├── main.py                          # Model Fine-tuning (SetFit + ModernBERT)
 │   ├── get_error_rates.py               # Extract Validation TPR/FPR for ACC

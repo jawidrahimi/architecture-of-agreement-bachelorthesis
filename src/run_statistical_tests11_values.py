@@ -23,7 +23,7 @@ FOCI_MAPPING = {
 
 FEATURES_APPROVED = [
     'Self-direction: action', 'Stimulation', 'Hedonism', 'Achievement', 'Power: resources',
-    'Security: societal', 'Conformity: rules', 'Conformity: interpersonal', 'Benevolence: dependability',
+    'Security: societal', 'Conformity: interpersonal', 'Benevolence: dependability',
     'Universalism: concern', 'Universalism: tolerance', 'Universalism: objectivity'
 ]
 
